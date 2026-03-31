@@ -1,0 +1,364 @@
+/* ── CSS Variables & Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #fff0f5;
+  --surface: #ffffff;
+  --primary: #e91e8c;
+  --primary-dark: #c2185b;
+  --secondary: #7b1fa2;
+  --text: #2d2d2d;
+  --muted: #888;
+  --border: #f0c0d8;
+  --alert-bg: #fff3cd;
+  --alert-border: #ffc107;
+  --alert-text: #856404;
+  --error: #d32f2f;
+  --success: #2e7d32;
+  --card-shadow: 0 2px 12px rgba(233,30,140,0.08);
+  --radius: 14px;
+}
+
+body.dark {
+  --bg: #1a1a2e;
+  --surface: #16213e;
+  --primary: #f06292;
+  --primary-dark: #e91e8c;
+  --secondary: #ce93d8;
+  --text: #f0f0f0;
+  --muted: #aaa;
+  --border: #3a3a5c;
+  --alert-bg: #3a3000;
+  --alert-border: #ffc107;
+  --alert-text: #ffe082;
+  --card-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ── Screens ── */
+.screen { min-height: 100vh; }
+.hidden { display: none !important; }
+
+/* ── PIN Screen ── */
+#pin-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.pin-card {
+  text-align: center;
+  max-width: 340px;
+  width: 100%;
+}
+.pin-card h1 { font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--primary); }
+.pin-card p { margin-bottom: 1rem; color: var(--muted); }
+#pin-input {
+  width: 100%;
+  font-size: 2rem;
+  text-align: center;
+  letter-spacing: 0.5rem;
+  padding: 0.6rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+/* ── Header ── */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--card-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+header h1 { font-size: 1.4rem; color: var(--primary); }
+.header-actions { display: flex; gap: 0.5rem; }
+
+/* ── Main Layout ── */
+main {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── Card ── */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border);
+}
+.card h2 { font-size: 1.1rem; margin-bottom: 1rem; color: var(--primary); }
+
+/* ── Form ── */
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; font-size: 0.9rem; margin-bottom: 0.35rem; font-weight: 600; }
+.form-group input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: var(--bg);
+  color: var(--text);
+  transition: border-color 0.2s;
+}
+.form-group input:focus { outline: none; border-color: var(--primary); }
+
+/* ── Buttons ── */
+.btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  transition: background 0.2s, transform 0.1s;
+}
+.btn:active { transform: scale(0.97); }
+.btn.primary { background: var(--primary); color: #fff; }
+.btn.primary:hover { background: var(--primary-dark); }
+.btn.secondary { background: var(--secondary); color: #fff; }
+.btn.secondary:hover { opacity: 0.9; }
+.btn.ghost { background: transparent; border: 2px solid var(--border); color: var(--text); }
+.btn.ghost:hover { border-color: var(--primary); color: var(--primary); }
+.btn.icon { background: transparent; font-size: 1.3rem; padding: 0.3rem 0.5rem; border-radius: 8px; }
+.btn.icon:hover { background: var(--border); }
+.btn.full { width: 100%; margin-top: 0.5rem; }
+
+/* ── Results Grid ── */
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.result-item {
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 0.8rem;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+.result-item .label { display: block; font-size: 0.75rem; color: var(--muted); margin-bottom: 0.3rem; }
+.result-item .value { display: block; font-size: 1rem; font-weight: 700; color: var(--primary); }
+
+/* ── Alert ── */
+.alert {
+  background: var(--alert-bg);
+  border: 1px solid var(--alert-border);
+  color: var(--alert-text);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+.alert.danger { background: #fdecea; border-color: #f44336; color: #b71c1c; }
+body.dark .alert.danger { background: #3b0000; border-color: #f44336; color: #ff8a80; }
+
+/* ── Doctor Section ── */
+#doctor-section {
+  margin-top: 0.75rem;
+}
+#doctor-section .alert {
+  margin-bottom: 0.75rem;
+}
+
+/* ── Insights ── */
+.insights { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+.insight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  background: var(--bg);
+  border-left: 3px solid var(--primary);
+}
+
+/* ── Food Box ── */
+.food-box {
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+  font-size: 0.88rem;
+}
+.food-box strong { display: block; margin-bottom: 0.4rem; color: var(--secondary); }
+.food-box ul { padding-left: 1.2rem; }
+.food-box li { margin-bottom: 0.2rem; }
+
+/* ── Chart ── */
+#cycle-chart { width: 100%; display: block; }
+.muted { color: var(--muted); font-size: 0.88rem; text-align: center; padding: 0.5rem 0; }
+
+/* ── History List ── */
+#history-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.history-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.88rem;
+  border: 1px solid var(--border);
+  gap: 0.5rem;
+}
+.history-item .hi-date { font-weight: 600; flex: 1; }
+.history-item .hi-cycle { color: var(--muted); }
+.history-item .hi-badge {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 20px;
+  background: #e8f5e9;
+  color: #2e7d32;
+  white-space: nowrap;
+}
+.history-item .hi-badge.abnormal { background: #fdecea; color: #b71c1c; }
+body.dark .history-item .hi-badge { background: #1b5e20; color: #a5d6a7; }
+body.dark .history-item .hi-badge.abnormal { background: #3b0000; color: #ff8a80; }
+.history-item .del-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 1rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+.history-item .del-btn:hover { color: var(--error); }
+
+/* ── Error ── */
+.error { color: var(--error); font-size: 0.82rem; margin-top: 0.3rem; }
+
+/* ── Footer ── */
+footer { text-align: center; padding: 1rem 1rem 2rem; }
+.disclaimer { font-size: 0.78rem; color: var(--muted); max-width: 500px; margin: 0 auto; line-height: 1.5; }
+
+/* ── PWA Install Banner ── */
+.install-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  border-top: 2px solid var(--primary);
+  padding: 0.9rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  box-shadow: 0 -4px 16px rgba(233,30,140,0.12);
+  z-index: 100;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+}
+.install-banner span { flex: 1; min-width: 160px; }
+.install-actions { display: flex; gap: 0.5rem; }
+
+/* ── Responsive & Mobile Optimisation ── */
+
+/* Ensure all interactive elements meet 48px minimum touch target */
+.btn {
+  min-height: 48px;
+  min-width: 48px;
+}
+
+/* Larger tap targets for inputs on mobile */
+.form-group input {
+  min-height: 48px;
+  font-size: 1rem; /* prevents iOS auto-zoom on focus */
+}
+
+/* PIN input — keep big on all screens */
+#pin-input {
+  min-height: 56px;
+}
+
+/* Prevent iOS tap highlight flash */
+button, input, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Smooth scrolling for the whole page */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%; /* prevent font scaling in landscape on iOS */
+}
+
+/* Safe area insets for notched phones (iPhone X+) */
+header {
+  padding-left: max(1.5rem, env(safe-area-inset-left));
+  padding-right: max(1.5rem, env(safe-area-inset-right));
+}
+main {
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+}
+.install-banner {
+  padding-bottom: max(0.9rem, env(safe-area-inset-bottom));
+}
+footer {
+  padding-bottom: max(2rem, env(safe-area-inset-bottom));
+}
+
+/* Small phones (≤ 480px) */
+@media (max-width: 480px) {
+  header h1 { font-size: 1.1rem; }
+  .card { padding: 1rem; }
+  .result-grid { grid-template-columns: 1fr 1fr; }
+  .history-item { flex-wrap: wrap; }
+
+  /* Stack install banner vertically on small screens */
+  .install-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .install-actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+  .install-actions .btn {
+    flex: 1;
+  }
+
+  /* Bigger icon buttons in header on mobile */
+  .btn.icon {
+    font-size: 1.5rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  /* Full-width result items on very small screens */
+  .result-item { padding: 0.65rem; }
+  .result-item .value { font-size: 0.9rem; }
+}
+
+/* Landscape phones */
+@media (max-width: 768px) and (orientation: landscape) {
+  main { padding-top: 0.75rem; }
+  .card { padding: 0.9rem 1rem; }
+  .pin-card { max-width: 420px; }
+}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI-powered period tracker with predictions, insights, and health tips." />
+  <title>🌸 Period Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+
+  <!-- PWA / theme -->
+  <meta name="theme-color" content="#e91e8c" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <!-- iOS Safari PWA support -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="PeriodTracker" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+  <!-- MS Tiles -->
+  <meta name="msapplication-TileColor" content="#e91e8c" />
+  <meta name="msapplication-TileImage" content="icons/icon-192.png" />
+</head>
+<body class="light">
+
+  <!-- ══ PIN SCREEN ══ -->
+  <div id="pin-screen" class="screen">
+    <div class="pin-card card">
+      <h1>🌸 Period Tracker</h1>
+      <p id="pin-label">Set a 4-digit PIN to protect your data</p>
+      <input
+        id="pin-input"
+        type="password"
+        inputmode="numeric"
+        maxlength="4"
+        placeholder="••••"
+        autocomplete="off"
+        aria-label="PIN input"
+      />
+      <p id="pin-error" class="error hidden" role="alert"></p>
+      <button id="pin-submit-btn" class="btn primary full">Set PIN</button>
+      <button id="pin-reset-btn" class="btn ghost full" style="margin-top:0.5rem">Reset &amp; Clear All Data</button>
+    </div>
+  </div>
+
+  <!-- ══ APP SCREEN ══ -->
+  <div id="app-screen" class="screen hidden">
+
+    <header>
+      <h1>🌸 Period Tracker</h1>
+      <div class="header-actions">
+        <button id="notif-btn" class="btn icon" title="Enable Notifications" aria-label="Enable notifications">🔔</button>
+        <button id="dark-toggle" class="btn icon" title="Toggle Dark Mode" aria-label="Toggle dark mode">🌙</button>
+        <button id="lock-btn" class="btn icon" title="Lock App" aria-label="Lock app">🔒</button>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- Input Card -->
+      <section class="card" aria-label="Cycle Input">
+        <h2>📅 Enter Your Cycle Info</h2>
+        <div class="form-group">
+          <label for="last-date">Last Period Start Date</label>
+          <input type="date" id="last-date" aria-required="true" />
+          <p id="date-error" class="error hidden" role="alert"></p>
+        </div>
+        <div class="form-group">
+          <label for="cycle-len">Average Cycle Length (days)</label>
+          <input type="number" id="cycle-len" value="28" min="1" max="90" aria-required="true" />
+          <p id="cycle-error" class="error hidden" role="alert"></p>
+        </div>
+        <button id="predict-btn" class="btn primary full">🔮 Predict My Cycle</button>
+      </section>
+
+      <!-- Results Card -->
+      <section id="results" class="card hidden" aria-label="Prediction Results">
+        <h2>📊 Your Cycle Predictions</h2>
+
+        <div id="alert-box" class="alert hidden" role="alert"></div>
+
+        <div class="result-grid">
+          <div class="result-item">
+            <span class="label">Next Period</span>
+            <span class="value" id="next-period">—</span>
+          </div>
+          <div class="result-item">
+            <span class="label">Days Away</span>
+            <span class="value" id="days-away">—</span>
+          </div>
+          <div class="result-item" style="grid-column: 1 / -1;">
+            <span class="label">Fertile Window</span>
+            <span class="value" id="fertile-window">—</span>
+          </div>
+        </div>
+
+        <!-- Smart Insights -->
+        <div id="insights-box" class="insights" aria-live="polite"></div>
+
+        <!-- Food Suggestions -->
+        <div id="food-box" class="food-box"></div>
+
+        <!-- Doctor Button — shown only when period is delayed >7 days -->
+        <div id="doctor-section" class="hidden">
+          <p id="delay-message" class="alert danger" role="alert">
+            🔴 Your period seems delayed. Consider consulting a doctor.
+          </p>
+          <button id="doctor-btn" class="btn secondary full">
+            🏥 Find Nearby Gynecologist
+          </button>
+        </div>
+      </section>
+
+      <!-- History Card -->
+      <section class="card" aria-label="Cycle History">
+        <h2>📋 Cycle History</h2>
+        <ul id="history-list" aria-label="Previous cycle entries">
+          <li class="muted">No cycle history yet.</li>
+        </ul>
+      </section>
+
+      <!-- Chart Card -->
+      <section id="chart-section" class="card hidden" aria-label="Cycle Chart">
+        <h2>📈 Cycle Pattern Chart</h2>
+        <p id="chart-placeholder" class="muted">Add at least 2 entries to see your chart.</p>
+        <canvas id="cycle-chart" height="200" aria-label="Cycle length bar chart" role="img"></canvas>
+      </section>
+
+    </main>
+
+    <footer>
+      <p class="disclaimer">
+        ⚠️ This app provides general health guidance and is <strong>not</strong> a medical diagnosis tool.
+        Always consult a qualified healthcare professional for medical advice.
+      </p>
+    </footer>
+
+  </div><!-- /app-screen -->
+
+  <!-- PWA Install Banner -->
+  <div id="install-banner" class="install-banner hidden" role="complementary" aria-label="Install app">
+    <span>📲 Install Period Tracker on your device</span>
+    <div class="install-actions">
+      <button id="install-btn" class="btn primary">Install</button>
+      <button id="install-dismiss" class="btn ghost">Not now</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
